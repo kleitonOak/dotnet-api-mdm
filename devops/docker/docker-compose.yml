@@ -1,0 +1,19 @@
+version: '3.8'
+volumes:
+  data:
+services:
+  db:
+    image: mysql:8.0.35
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mdm-person
+  app:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - db
+    ports:
+      - 80:80
